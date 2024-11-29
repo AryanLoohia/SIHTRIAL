@@ -2,14 +2,14 @@
 # from flask import Flask, request, render_template
 # import pickle
 
-# flask_app = Flask(__name__)
+# app = Flask(__name__)
 # model = pickle.load(open("model.pkl", "rb"))
 
-# @flask_app.route("/")
+# @app.route("/")
 # def Home():
 #     return render_template("index.html")
 
-# @flask_app.route("/predict", methods=["POST"])
+# @app.route("/predict", methods=["POST"])
 # def predict():
    
 #     hex_feature = request.form['hexa'] 
@@ -21,7 +21,7 @@
 #     return render_template("index.html", prediction_text="The algorithm is {}".format(prediction[0]))
 
 # if __name__ == "__main__":
-#     flask_app.run(debug=True)
+#     app.run(debug=True)
 
 from flask import Flask, request, jsonify,render_template
 import numpy as np
@@ -39,7 +39,7 @@ from sklearn.preprocessing import LabelEncoder
 import itertools
 from sklearn.preprocessing import StandardScaler
 
-flask_app = Flask(__name__)
+app = Flask(__name__)
 
 # Load your machine learning model (replace 'your_model.pkl' with the correct path)
 model = pickle.load(open("model.pkl", "rb"))
@@ -379,11 +379,11 @@ def label_encoder1_function():
     return label_encoder1
 
 
-@flask_app.route("/")
+@app.route("/")
 def Home():
     return render_template("index.html")
 
-# @flask_app.route('/predict', methods=['POST'])
+# @app.route('/predict', methods=['POST'])
 # def predict():
 #     # Get the hexadecimal data from the form
 #     hex_data = request.form.get('hexa')  # form data instead of json
@@ -429,7 +429,7 @@ def Home():
 #     except Exception as e:
 #         return jsonify({'error': str(e)}), 500
 
-@flask_app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['POST'])
 def predict():
     hex_data = request.form.get('hexa')
     
@@ -488,4 +488,4 @@ def predict():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    flask_app.run(debug=True,port=5002)
+    app.run(debug=True,port=5002)
